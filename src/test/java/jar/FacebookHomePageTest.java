@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.By;
 
@@ -15,7 +16,7 @@ public class FacebookHomePageTest {
     @Before
     public void setUp() {
         // Set the path to your WebDriver (example: ChromeDriver)
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\home\\eclipse-workspace\\my-assignment\\Drivers\\chromedriver-win64\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Administrator\\Desktop\\Selenium_Code\\Selenium-Code\\Drivers\\chromedriver-win64\\chromedriver.exe");
         // Initialize WebDriver and navigate to Facebook homepage
         driver = new ChromeDriver();
         baseUrl = "https://www.facebook.com";
@@ -25,7 +26,7 @@ public class FacebookHomePageTest {
     @Test
     public void testHomePageTitle() {
         // Check that the page title is correct
-        String expectedTitle = "Facebook - log in or sign up";
+        String expectedTitle = "Log into Facebook";
         String actualTitle = driver.getTitle();
         assertEquals(expectedTitle, actualTitle);
     }
@@ -50,9 +51,32 @@ public class FacebookHomePageTest {
         boolean isLanguageSelectorDisplayed = driver.findElement(By.id("pageFooterChildren")).isDisplayed();
         assertTrue(isLanguageSelectorDisplayed);
     }
+    //F-Name - Aamir
+    //L-Name - Patel
+    //Email - aamirp480@gmail.com
+    //pass - Bnm1234@
+    //DOB - Sep 22 1980
+    //Gender - Male
+    @Test
+    public void testLoginFunctionality() {
+    	driver.findElement(By.id("email")).isDisplayed();
+    	WebElement email = driver.findElement(By.id("email"));
+    	email.sendKeys("aamirp480@gmail.com");
+    	driver.findElement(By.id("pass")).sendKeys("Bnm1234@");
+    	driver.findElement(By.id("loginbutton")).click();
+    	try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	driver.findElement(By.xpath("//*[text()='Upload a verification selfie']"));
+    	boolean verification = driver.findElement(By.xpath("//*[text()='Upload a verification selfie']")).isDisplayed();
+    	
+        assertTrue(verification);
 
-    // You can add more tests for various elements
-
+    }
     @org.junit.After
     public void tearDown() {
         // Close the browser after tests are done
